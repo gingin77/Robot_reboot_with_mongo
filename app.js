@@ -18,18 +18,6 @@ app.set('views', './views')
 
 app.use(express.static(__dirname + '/public'))
 
-app.use('/:username', function (req, res){
-  MongoClient.connect(mongoURL, function (err, db) {
-    const robots = db.collection('robots');
-    let username = req.params.username;
-    console.log(username);
-    console.log(typeof req.params.username);
-    console.log(req.params.username);
-    robots.find({username: username}).toArray(function (err, docs) {
-      res.render('individual', {robots: docs});
-    });
-  });
-});
 
 
 app.use('/available', function (req, res) {
@@ -49,6 +37,20 @@ app.use('/employed', function (req, res) {
     })
   })
 })
+
+app.use('/:username', function (req, res){
+  MongoClient.connect(mongoURL, function (err, db) {
+    const robots = db.collection('robots');
+    let username = req.params.username;
+    console.log(username);
+    console.log(typeof req.params.username);
+    console.log(req.params.username);
+    robots.find({username: username}).toArray(function (err, docs) {
+      res.render('individual', {robots: docs});
+    });
+  });
+});
+
 
 // What Clinton posted in below.. However, I've changed restaurants to robots and made other db-specific modifications.
 app.use('/', function (req, res) {

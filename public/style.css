@@ -15,6 +15,10 @@ span, p{
   font-size: larger;
 }
 
+.second{
+  margin-left: 30px;
+}
+
 .wrapper{
   display: flex;
   flex-wrap: wrap;
