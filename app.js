@@ -9,6 +9,7 @@ const MongoClient = mongodb.MongoClient;
 let mongoURL = 'mongodb://localhost:27017/newdb'
 // Make sure that constants and the term after *27017/ stay consistent.... the "newdb" shown on the line above has to match what is written on the command line prompt for the import.
 // mongoimport --db newdb --collection robots --jsonArray robot_data.json
+// let name = ""
 
 const app = express()
 app.engine('mustache', mustacheExpress())
@@ -16,6 +17,20 @@ app.set('view engine', 'mustache')
 app.set('views', './views')
 
 app.use(express.static(__dirname + '/public'))
+
+app.use('/:username', function (req, res){
+  MongoClient.connect(mongoURL, function (err, db) {
+    const robots = db.collection('robots');
+    let username = req.params.username;
+    console.log(username);
+    console.log(typeof req.params.username);
+    console.log(req.params.username);
+    robots.find({username: username}).toArray(function (err, docs) {
+      res.render('individual', {robots: docs});
+    });
+  });
+});
+
 
 app.use('/available', function (req, res) {
   MongoClient.connect(mongoURL, function (err, db) {
@@ -45,9 +60,6 @@ app.use('/', function (req, res) {
   })
 })
 
-// app.get('/', function (req,res){
-//   res.render('robot', dataset)
-//   })
 
 app.listen(3000, function () {
   console.log('Successfully started express application!');
