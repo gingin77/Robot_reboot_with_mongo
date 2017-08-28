@@ -15,14 +15,14 @@
  	<body>
     <h1>Index</h1>
     <div class="wrapper">
-          {{#users}}
+          {{#robots}}
             <div class="grey_frame">
                 <img class="image" src="{{avatar}}">
                 <h2><a href="/index/{{id}}">{{name}}</h2></a>
                 {{#job}}<h3>{{job}}, {{company}}</h3>{{/job}}
                 {{^job}}<h3 class="available">Available for hire</h3>{{/job}}
             </div>
-          {{/users}}
+          {{/robots}}
     </div>
  	</body>
  </html>
