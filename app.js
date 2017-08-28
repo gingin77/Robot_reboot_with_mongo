@@ -2,6 +2,8 @@ const express = require('express')
 const mustacheExpress = require('mustache-express')
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
+const underscore = require('underscore');
+
 // const MongoClient = require('mongodb').MongoClient;
   // , assert = require('assert')
 
@@ -55,12 +57,45 @@ app.use('/:username', function (req, res){
 // What Clinton posted in below.. However, I've changed restaurants to robots and made other db-specific modifications.
 app.use('/', function (req, res) {
   MongoClient.connect(mongoURL, function (err, db) {
-    const robots = db.collection('robots');
+    const robots = db.collection('robots')
+    // const getSkills = robots.map(function(d) {
+    //   return d[skills];
+    // }); How does one get a list of all skills listed in the robots db???
+    // console.log(getSkills)
     robots.find({}).toArray(function (err, docs) {
-      res.render('robot', {robots: docs})
+      res.render('robot', {robots: docs})/*, skills: skills*/
     })
   })
 })
+
+
+// var data = [{name: 'dan', value: 40}, {name: 'ryan', value: 50}];
+// var getKeys = _.pluck(data, 'name');
+// I want to generate a menu that lists all of the skills listed in the db. How to I access this info?
+
+
+
+// app.use('/', function (req, res) {
+//   MongoClient.connect(mongoURL, function (err, db) {
+//     const robots = db.collection('robots');
+//     robots.find({}).toArray(function (err, docs) {
+//       res.render('robot', {robots: docs})
+//     })
+//   })
+// })
+//
+// app.post('/skills:skill', function(req, res){
+//     let skill = req.params.skill;
+//     console.log(skill)
+//     console.log(typeof req.params.skill);
+//     console.log(req.params.skill);
+//     robots.find({username: skill}).toArray(function (err, docs) {
+//       res.render('individual', {robots: docs});
+//     });
+//   });
+
+
+
 
 
 app.listen(3000, function () {

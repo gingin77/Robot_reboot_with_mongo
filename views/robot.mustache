@@ -13,9 +13,20 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
  	</head>
  	<body>
-    <a href="/available">Immediately available for hire</a>
-    <a class="second" href="/employed">Currently Employed</a>
-    <h1>Index</h1>
+    <h1>Robot Candidate DB</h1>
+    <div>
+      <a href="/available">Immediately available for hire</a>
+      <a class="second" href="/employed">Currently Employed</a>
+      <!-- <form action="/skills:skill" method="post">
+        <input list="skills" name="skill">
+            <datalist id="skills">
+                {{#skills}}
+                <option value={{.}}>
+                {{/skills}}
+            </datalist>
+        <input type="submit">
+      </form> -->
+    </div>
     <div class="wrapper">
           {{#robots}}
             <div class="grey_frame">
