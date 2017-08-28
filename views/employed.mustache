@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+ <html>
+ 	<head>
+ 		<meta charset="utf-8">
+ 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 		<title></title>
+ 		<meta name="description" content=" " />
+ 		<meta name="author" content=" " />
+ 		<meta name="HandheldFriendly" content="true" />
+ 		<meta name="MobileOptimized" content="320" />
+ 		<!-- Use maximum-scale and user-scalable at your own risk. It disables pinch/zoom. Think about usability/accessibility before including.-->
+ 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+ 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+ 	</head>
+ 	<body>
+    <h1>Robots with Jobs</h1>
+    <div class="wrapper">
+          {{#robots}}
+            <div class="grey_frame">
+                <img class="image" src="{{avatar}}">
+                <h2><a href="/index/{{id}}">{{name}}</h2></a>
+                {{#job}}<h3>{{job}}, {{company}}</h3>{{/job}}
+                {{^job}}<h3 class="available">Available for hire</h3>{{/job}}
+            </div>
+          {{/robots}}
+    </div>
+
+
+<!-- <div class="display_top">
+      <img class="round_frame" src="{{avatar}}" />
+      <div class="top_text">
+        <h2>{{name}}</h2>
+        {{#address}}
+        <span>{{#address.city}}{{address.city}}, {{/address.city}}{{address.country}}</span> |
+        {{/address}}{{#job}}<span>{{job}}, {{company}}</span>{{/job}}
+        {{^job}}<span class="available">Available for hire</span>{{/job}}
+        <p>{{email}} | {{phone}}</p>
+      </div>
+    </div>
+
+    <div class="display_lower">
+      <div class="row">
+        {{#university}}
+        <h3 class="bold-right-align">Education</h3><span class="spacer"></span><span class="left-align">{{university}}</span>
+        {{/university}}
+      </div>
+      <div class="row">
+        <h3 class="bold-right-align">Skills</h3>
+        <span class="spacer"></span>
+        <span class="left-align">
+          {{#skills}}
+          {{.}}<br />
+          {{/skills}}
+        </span>
+      </div>
+
+    </div>
+ -->
+
+ 	</body>
+ </html>

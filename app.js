@@ -7,6 +7,8 @@ const MongoClient = mongodb.MongoClient;
 
 // Connection URL
 let mongoURL = 'mongodb://localhost:27017/newdb'
+// Make sure that constants and the term after *27017/ stay consistent.... the "newdb" shown on the line above has to match what is written on the command line prompt for the import.
+// mongoimport --db newdb --collection robots --jsonArray robot_data.json
 
 const app = express()
 app.engine('mustache', mustacheExpress())
@@ -15,15 +17,23 @@ app.set('views', './views')
 
 app.use(express.static(__dirname + '/public'))
 
-// Use connect method to connect to the server
-// MongoClient.connect(mongoURL, function(err, db) {
-//   assert.equal(null, err);
-//   console.log("Connected successfully to server");
-//   //
-//   // findDocuments(robots)
-//
-//   db.close();
-// })
+app.use('/available', function (req, res) {
+  MongoClient.connect(mongoURL, function (err, db) {
+    const robots = db.collection('robots')
+    robots.find({job: null}).toArray(function (err, job) {
+      res.render('available', {robots: job})
+    })
+  })
+})
+
+app.use('/employed', function (req, res) {
+  MongoClient.connect(mongoURL, function (err, db) {
+    const robots = db.collection('robots')
+    robots.find({job: {$ne: null}}).toArray(function (err, job) {
+      res.render('employed', {robots: job})
+    })
+  })
+})
 
 // What Clinton posted in below.. However, I've changed restaurants to robots and made other db-specific modifications.
 app.use('/', function (req, res) {
@@ -35,22 +45,9 @@ app.use('/', function (req, res) {
   })
 })
 
-app.get('/', function (req,res){
-  res.render('robot', dataset)
-  })
-
-// var findDocuments = function(db, callback) {
-//   // Get the documents collection
-//   var collection = db.collection('documents');
-//   // Find some documents
-//   collection.find({}).toArray(function(err, docs) {
-//     assert.equal(err, null);
-//     console.log("Found the following records");
-//     console.log(docs)
-//     callback(docs);
-//   });
-// }
-
+// app.get('/', function (req,res){
+//   res.render('robot', dataset)
+//   })
 
 app.listen(3000, function () {
   console.log('Successfully started express application!');
