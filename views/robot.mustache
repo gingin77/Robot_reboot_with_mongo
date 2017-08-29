@@ -2,13 +2,13 @@
  <html>
  	<head>
  		<meta charset="utf-8">
- 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
  		<title></title>
  		<meta name="description" content=" " />
  		<meta name="author" content=" " />
  		<meta name="HandheldFriendly" content="true" />
  		<meta name="MobileOptimized" content="320" />
- 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+ 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
  	</head>
@@ -17,18 +17,28 @@
     <div>
       <a href="/available">Immediately available for hire</a>
       <a class="second" href="/employed">Currently Employed</a>
-      <!-- <form action="/skills:skill" method="post">
-        <input list="skills" name="skill">
-            <datalist id="skills">
+
+        <div id="sidebar">
+          <!-- <form action="/skills:skill" method="post"> -->
+            <!-- <input list="skills" name="skill"> -->
+
+            <!-- <div id="skills">
+              {{#robots}}
                 {{#skills}}
-                <option value={{.}}>
+                  <a href="/:{{.}}">
+                    {{.}}
+                  </a>
                 {{/skills}}
-            </datalist>
-        <input type="submit">
-      </form> -->
+                {{/robots}}
+            </div> -->
+
+            <!-- <input type="submit"> -->
+          <!-- </form> -->
+        </div>
+
     </div>
     <div class="wrapper">
-          {{#robots}}
+      {{#robots}}
             <div class="grey_frame">
                 <img class="image" src="{{avatar}}">
                 <h2><a href="/{{username}}">{{name}}</h2></a>
